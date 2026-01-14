@@ -1,0 +1,117 @@
+[gd_scene load_steps=15 format=3 uid="uid://byuhn6amdun6v"]
+
+[ext_resource type="Script" uid="uid://do3hp3s0botfq" path="res://scripts/theo_(player).gd" id="1_sy5gt"]
+[ext_resource type="Texture2D" uid="uid://d18ll4s65utv2" path="res://sprites/SpritesTheoGodot.png" id="1_tynch"]
+[ext_resource type="Texture2D" uid="uid://c64kh3bn5jjgi" path="res://sprites/interagiveis/SpritesTheoGodot (2).png" id="3_flinb"]
+[ext_resource type="Texture2D" uid="uid://beaki0g672h15" path="res://icon.svg" id="4_blyh2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s7dqu"]
+atlas = ExtResource("1_tynch")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_grrbi"]
+atlas = ExtResource("1_tynch")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5bonq"]
+atlas = ExtResource("1_tynch")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ql1b"]
+atlas = ExtResource("1_tynch")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ik2we"]
+atlas = ExtResource("1_tynch")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_flinb"]
+atlas = ExtResource("1_tynch")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_blyh2"]
+atlas = ExtResource("3_flinb")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gvywo"]
+atlas = ExtResource("3_flinb")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_84665"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s7dqu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_grrbi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5bonq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ql1b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ik2we")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_flinb")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_blyh2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gvywo")
+}],
+"loop": true,
+"name": &"run",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_blyh2"]
+size = Vector2(10, 16)
+
+[node name="Theo (player)" type="CharacterBody2D"]
+collision_mask = 15
+script = ExtResource("1_sy5gt")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_84665")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_blyh2")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+limit_left = -30
+limit_bottom = 660
+limit_smoothed = true
+position_smoothing_speed = 3.0
+drag_horizontal_enabled = true
+editor_draw_limits = true
+editor_draw_drag_margin = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="FootPosition" type="Node2D" parent="."]
+position = Vector2(0, 6)
+
+[node name="Sprite2D" type="Sprite2D" parent="FootPosition"]
+visible = false
+scale = Vector2(0.07, 0.07)
+texture = ExtResource("4_blyh2")
