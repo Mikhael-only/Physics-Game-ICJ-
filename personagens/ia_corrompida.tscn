@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0d1u7pdai08s"]
+[gd_scene load_steps=6 format=3 uid="uid://b0d1u7pdai08s"]
 
 [ext_resource type="Texture2D" uid="uid://55ddgmla7ypq" path="res://sprites/interagiveis/Sprites_IACorrompida_Godot.png" id="1_0wx0i"]
+[ext_resource type="Script" uid="uid://dvpavlfpcu32g" path="res://scripts/ia_corrompida.gd" id="1_ktynd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ktynd"]
 atlas = ExtResource("1_0wx0i")
@@ -17,8 +18,16 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0wx0i"]
+size = Vector2(65, 3420)
+
 [node name="IACorrompida" type="Area2D"]
+script = ExtResource("1_ktynd")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_2dpeh")
 animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -913)
+shape = SubResource("RectangleShape2D_0wx0i")

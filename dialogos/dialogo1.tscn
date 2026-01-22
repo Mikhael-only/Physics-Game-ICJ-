@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dl4dpf0gwq87c"]
+
+[ext_resource type="Texture2D" uid="uid://i5ng4xluwh72" path="res://sprites/interagiveis/SpritesCardGodot.png" id="1_srlnr"]
+[ext_resource type="Script" uid="uid://bghs22tf3j72u" path="res://scripts/dialogotext.gd" id="2_4x7ql"]
+
+[node name="dialogo1" type="Node2D"]
+
+[node name="dialogotext" type="NinePatchRect" parent="."]
+offset_right = 136.0
+offset_bottom = 89.0
+texture = ExtResource("1_srlnr")
+script = ExtResource("2_4x7ql")
+
+[node name="text" type="RichTextLabel" parent="dialogotext"]
+layout_mode = 0
+offset_right = 142.0
+offset_bottom = 30.0
+
+[node name="Timer" type="Timer" parent="dialogotext"]

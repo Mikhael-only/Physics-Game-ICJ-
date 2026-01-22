@@ -15,6 +15,10 @@ run/main_scene="uid://b8dnuc8yet4cw"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [layer_names]
 
 2d_physics/layer_1="player"
