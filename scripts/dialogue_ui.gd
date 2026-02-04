@@ -33,7 +33,6 @@ func _mostrar_proxima_letra():
 		digitando = false
 
 func completar_fala():
-	# ✅ completa imediatamente o texto
 	texto.text = fala_completa
 	timer.stop()
 	digitando = false

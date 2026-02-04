@@ -10,7 +10,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-# Ativar skill e desaparecer
+
 func _on_body_entered(body: Node2D) -> void:
 	if body.has_method("colect_skill_flash"):
 		body.colect_skill_flash(true)

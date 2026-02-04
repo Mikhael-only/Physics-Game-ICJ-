@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2icxemc1duu4"]
+
+[ext_resource type="Script" uid="uid://2aaxrka3lkvt" path="res://scripts/testecaixa_1.gd" id="1_qh6dk"]
+[ext_resource type="Texture2D" uid="uid://40w5w44csdnu" path="res://sprites/interagiveis/CaixaGodot.png" id="2_j8jj2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7n20q"]
+
+[node name="testecaixa1" type="RigidBody2D"]
+script = ExtResource("1_qh6dk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7n20q")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_j8jj2")

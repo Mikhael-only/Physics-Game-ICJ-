@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ct8uot57ev3t4"]
+
+[ext_resource type="Texture2D" uid="uid://cucvhh13r5lcc" path="res://sprites/interagiveis/chapa_ponte.png" id="1_03gbw"]
+
+[node name="chapa_ponte" type="Sprite2D"]
+texture = ExtResource("1_03gbw")

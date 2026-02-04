@@ -4,12 +4,12 @@
 [ext_resource type="FontFile" uid="uid://yg7rvpir4c8g" path="res://shaders/Minecraft.ttf" id="2_8i7gl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_csuyi"]
-bg_color = Color(0, 0, 0, 1)
+bg_color = Color(1, 1, 1, 1)
 border_width_left = 10
 border_width_top = 10
 border_width_right = 10
 border_width_bottom = 10
-border_color = Color(0.25490198, 0, 0, 1)
+border_color = Color(0.49424785, 0, 0, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -17,6 +17,7 @@ corner_radius_bottom_left = 20
 
 [sub_resource type="LabelSettings" id="LabelSettings_csuyi"]
 font_size = 30
+font_color = Color(0.67058825, 0, 0, 1)
 outline_color = Color(0, 0, 0, 1)
 
 [node name="Dialogue_UI" type="CanvasLayer"]

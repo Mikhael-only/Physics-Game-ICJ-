@@ -5,13 +5,20 @@ var JUMP_FORCE: float = -300.0
 var SPEED: float = 200.0
 var is_being_pulled_by_orb: bool = false
 var colected_flash: bool = false
-var pode_mover: bool = true   # trava movimento durante diálogos
+var pode_mover: bool = true
+var is_dead: bool = false
+var last_checkpoint: Vector2 = Vector2.ZERO 
 
+@export var PUSH_FORCE_RIGID: float = 100000.0
 @export var acceleration: float = 400.0
+@export var abyss_y: float = 663.0
+@export var safe_position: Vector2 = Vector2.ZERO
+
 @onready var foot: Node2D = $FootPosition
 @onready var tilemap: TileMap = get_tree().get_first_node_in_group("level_tilemap")
 @onready var animation: AnimatedSprite2D = $AnimatedSprite2D
 @onready var camera: Camera2D = $Camera2D
+@onready var raycast: RayCast2D = $RayCast2D
 
 func colect_skill_flash(be_flash: bool) -> void:
 	colected_flash = be_flash
@@ -46,9 +53,12 @@ func get_friction_under_player() -> float:
 	return 0.4
 
 func _physics_process(delta: float) -> void:
+	if is_dead:
+		return
 	
 	var _friction = get_friction_under_player()
 	var direction = Input.get_axis("ui_left", "ui_right")
+	raycast.target_position.x = direction * 15
 	
 	if not is_on_floor():
 		velocity.y += get_gravity().y * delta
@@ -61,14 +71,15 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 
-		if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		if Input.is_action_just_pressed("ui_accept"):
 			velocity.y = JUMP_FORCE
 	else:
 		velocity.x = 0
 		
 	move_and_slide()
-	apply_push_force()
+	apply_push_force(delta)
 
+	# animações normais
 	if pode_mover:
 		if not is_on_floor():
 			animation.play("jump")
@@ -79,16 +90,26 @@ func _physics_process(delta: float) -> void:
 	else:
 		animation.play("idle")
 
-func apply_push_force() -> void:
+	# checar se caiu no abismo
+	if global_position.y > abyss_y:
+		die()
+
+func apply_push_force(delta: float) -> void:
 	for i in range(get_slide_collision_count()):
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()
 		
+		if collider is RigidBody2D:
+			var direction = -collision.get_normal()
+			
+			if abs(direction.x) > 0.5:
+				collider.apply_central_force(Vector2(direction.x * PUSH_FORCE_RIGID * delta, 0))
+
 		if collider is Pushables:
 			var direction = -collision.get_normal()
 			direction.y = 0
 			collider.slide_object(direction, SPEED)
-
+			
 func focar_npc(npc_pos: Vector2) -> void:
 	var centro = global_position.lerp(npc_pos, 0.9)
 	var tween = create_tween()
@@ -98,6 +119,28 @@ func focar_npc(npc_pos: Vector2) -> void:
 
 func resetar_camera() -> void:
 	var tween = create_tween()
-	tween.tween_property(camera, "global_position", global_position, 0.5)
 	tween.tween_property(camera, "zoom", Vector2(4, 4), 0.5)
+	
+	
+func set_checkpoint(pos: Vector2) -> void:
+	last_checkpoint = pos
+	
+
+func die() -> void:
+	is_dead = true
+	pode_mover = false
+	velocity = Vector2.ZERO
+	animation.play("death") 
+	await animation.animation_finished
+	respawn()
+
+func respawn() -> void:
+	if last_checkpoint != Vector2.ZERO:
+		global_position = last_checkpoint
+	else:
+		global_position = safe_position
+	animation.play("respawn")
+	await animation.animation_finished
+	is_dead = false
+	pode_mover = true
 	

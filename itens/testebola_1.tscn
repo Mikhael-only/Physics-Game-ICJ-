@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://d2egnrw1ig15i"]
+
+[ext_resource type="Texture2D" uid="uid://cm4enrh0n78v1" path="res://sprites/interagiveis/bola,png.png" id="1_a0aad"]
+[ext_resource type="Script" uid="uid://bspkthlvyqs5s" path="res://scripts/testebola_1.gd" id="1_ayq74"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_a0aad"]
+friction = 0.1
+bounce = 0.5
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ocywu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_a0aad")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ayq74"]
+
+[node name="testebola1" type="RigidBody2D"]
+position = Vector2(1, 0)
+collision_layer = 8
+collision_mask = 15
+mass = 0.5
+physics_material_override = SubResource("PhysicsMaterial_a0aad")
+inertia = 10.0
+can_sleep = false
+linear_damp_mode = 1
+linear_damp = 0.1
+script = ExtResource("1_ayq74")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.7, 0.7)
+sprite_frames = SubResource("SpriteFrames_ocywu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ayq74")
