@@ -4,14 +4,31 @@ class_name Pushables
 @export var gravity_scale: float = 1.0
 @export var friction_ground: float = 8.0
 @export var push_inertia: float = 4.0
+@export var abyss_y: float = 665.0
+@export var safe_position: Vector2 = Vector2.ZERO
 
 @onready var tilemap = get_tree().get_first_node_in_group("level_tilemap")
 @onready var foot = $FootPosition
+@onready var animation: AnimatedSprite2D = $AnimatedSprite2D
 
+var last_checkpoint: Vector2 = Vector2.ZERO
 var push_velocity_target: float = 0.0
 var is_being_pushed: bool = false
+var is_dead: bool = false
+var pode_mover: bool = true
+
+func _ready() -> void:
+	safe_position = global_position
 
 func _physics_process(delta: float) -> void:
+	
+	if is_dead:
+		velocity = Vector2.ZERO
+		return
+		
+	if global_position.y > abyss_y:
+		die()
+		
 	if not is_on_floor():
 		velocity.y += get_gravity().y * gravity_scale * delta
 
@@ -42,3 +59,18 @@ func get_friction_under_object() -> float:
 		return friction if friction != null else 0.4
 
 	return 0.4
+	
+func die() -> void:
+	is_dead = true
+	animation.play("death")
+	await animation.animation_finished
+	respawn()
+	
+func respawn() -> void:
+	if last_checkpoint != Vector2.ZERO:
+		global_position = last_checkpoint
+	else:
+		global_position = safe_position
+	animation.play("respawn")
+	await animation.animation_finished
+	is_dead = false
