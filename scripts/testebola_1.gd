@@ -1,11 +1,48 @@
 extends RigidBody2D
 
+var is_dead: bool = false
+var last_checkpoint: Vector2 = Vector2.ZERO
+var pode_mover: bool = true
+var colidiu: bool = false
 
-# Called when the node enters the scene tree for the first time.
+@onready var animation: AnimatedSprite2D = $AnimatedSprite2D
+
+@export var abyss_y: float = 650.0
+@export var safe_position: Vector2 = Vector2.ZERO
+
 func _ready() -> void:
-	pass # Replace with function body.
+	safe_position = global_position
+	last_checkpoint = safe_position
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	
+	
+	if is_dead:
+		self.freeze = true
+	else:
+		self.freeze = false
+		
+	if global_position.y > abyss_y:
+		die()
+	
+func die() -> void:
+	is_dead = true
+	animation.play("death")
+	await animation.animation_finished
+	respawn()
+	
+func respawn() -> void:
+	if last_checkpoint != Vector2.ZERO:
+		global_position = last_checkpoint
+	else:
+		global_position = safe_position
+	animation.play("respawn")
+	await animation.animation_finished
+	is_dead = false
+
+#func _on_area_2d_body_entered(body: Node2D) -> void:
+#	if body is CharacterBody2D and not colidiu:
+#		GameState.avancar_historia()
+#		colidiu = true
+#		print("Colidiu pela primeira vez!")

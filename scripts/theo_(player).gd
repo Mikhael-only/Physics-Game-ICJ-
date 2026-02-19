@@ -9,10 +9,12 @@ var pode_mover: bool = true
 var is_dead: bool = false
 var last_checkpoint: Vector2 = Vector2.ZERO 
 
-@export var PUSH_FORCE_RIGID: float = 100000.0
+@export var PUSH_SPEED_OBJECT: float = 100.0
+@export var PUSH_FORCE_RIGID: float = 3000.0
 @export var acceleration: float = 400.0
 @export var abyss_y: float = 663.0
 @export var safe_position: Vector2 = Vector2.ZERO
+@export var PUSH_VELOCITY_BOX: float = 150.0
 
 @onready var foot: Node2D = $FootPosition
 @onready var tilemap: TileMap = get_tree().get_first_node_in_group("level_tilemap")
@@ -77,9 +79,9 @@ func _physics_process(delta: float) -> void:
 		velocity.x = 0
 		
 	move_and_slide()
-	apply_push_force(delta)
+	apply_push_force(direction, delta)
 
-	# animações normais
+
 	if pode_mover:
 		if not is_on_floor():
 			animation.play("jump")
@@ -90,25 +92,29 @@ func _physics_process(delta: float) -> void:
 	else:
 		animation.play("idle")
 
-	# checar se caiu no abismo
+
 	if global_position.y > abyss_y:
 		die()
 
-func apply_push_force(delta: float) -> void:
+func apply_push_force(move_direction: float, delta: float) -> void:
+
+	if move_direction == 0:
+		return
+
 	for i in range(get_slide_collision_count()):
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()
+		var normal = collision.get_normal()
 		
-		if collider is RigidBody2D:
-			var direction = -collision.get_normal()
+		if normal.x * move_direction < -0.5:
 			
-			if abs(direction.x) > 0.5:
-				collider.apply_central_force(Vector2(direction.x * PUSH_FORCE_RIGID * delta, 0))
+			if collider is RigidBody2D:
+				collider.apply_central_force(Vector2(-normal.x * PUSH_FORCE_RIGID, 0))
 
-		if collider is Pushables:
-			var direction = -collision.get_normal()
-			direction.y = 0
-			collider.slide_object(direction, SPEED)
+
+			elif collider is Pushables:
+
+				collider.push(move_direction * PUSH_VELOCITY_BOX)
 			
 func focar_npc(npc_pos: Vector2) -> void:
 	var centro = global_position.lerp(npc_pos, 0.9)

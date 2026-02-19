@@ -15,10 +15,9 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[sub_resource type="LabelSettings" id="LabelSettings_csuyi"]
-font_size = 30
-font_color = Color(0.67058825, 0, 0, 1)
-outline_color = Color(0, 0, 0, 1)
+[sub_resource type="LabelSettings" id="LabelSettings_8i7gl"]
+font_size = 32
+font_color = Color(1, 0, 0, 1)
 
 [node name="Dialogue_UI" type="CanvasLayer"]
 script = ExtResource("1_csuyi")
@@ -32,7 +31,7 @@ anchor_bottom = 1.0
 offset_left = -528.0
 offset_top = -626.0
 offset_right = 527.0
-offset_bottom = -450.0
+offset_bottom = -478.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_csuyi")
@@ -43,7 +42,8 @@ layout_mode = 0
 offset_left = 55.0
 offset_top = 35.0
 offset_right = 1001.0
-offset_bottom = 142.0
+offset_bottom = 106.0
 theme_override_fonts/font = ExtResource("2_8i7gl")
-label_settings = SubResource("LabelSettings_csuyi")
+label_settings = SubResource("LabelSettings_8i7gl")
 autowrap_mode = 3
+justification_flags = 171

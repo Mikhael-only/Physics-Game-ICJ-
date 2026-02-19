@@ -6,10 +6,15 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7n20q"]
 
 [node name="testecaixa1" type="RigidBody2D"]
+collision_layer = 8
+collision_mask = 11
+mass = 10.0
+can_sleep = false
+lock_rotation = true
 script = ExtResource("1_qh6dk")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_7n20q")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_j8jj2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7n20q")

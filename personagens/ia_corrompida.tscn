@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b0d1u7pdai08s"]
+[gd_scene load_steps=7 format=3 uid="uid://b0d1u7pdai08s"]
 
 [ext_resource type="Texture2D" uid="uid://55ddgmla7ypq" path="res://sprites/interagiveis/Sprites_IACorrompida_Godot.png" id="1_0wx0i"]
 [ext_resource type="Script" uid="uid://dvpavlfpcu32g" path="res://scripts/ia_corrompida.gd" id="1_ktynd"]
@@ -19,7 +19,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0wx0i"]
-size = Vector2(65, 3420)
+size = Vector2(65, 700)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6jik4"]
+size = Vector2(182, 230)
 
 [node name="IACorrompida" type="Area2D"]
 collision_layer = 8
@@ -28,10 +31,19 @@ script = ExtResource("1_ktynd")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_2dpeh")
 animation = &"idle"
+autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, -913)
+position = Vector2(0.5, -174)
 shape = SubResource("RectangleShape2D_0wx0i")
+
+[node name="area_animacao" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="area_animacao"]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_6jik4")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="body_entered" from="area_animacao" to="." method="_on_area_animacao_body_entered"]
+[connection signal="body_exited" from="area_animacao" to="." method="_on_area_animacao_body_exited"]

@@ -11,5 +11,5 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_body_entered(body: Node) -> void:
-	if body is Player:
+	if body:
 		body.set_checkpoint(global_position)

@@ -1,30 +1,33 @@
 extends CharacterBody2D
 class_name Pushables
 
-@export var weight_modifier: float = 1.0
-@export var acceleration: float = 400.0
-@onready var foot = $FootPosition
-@onready var tilemap = get_tree().get_first_node_in_group("level_tilemap")
+@export var gravity_scale: float = 1.0
+@export var friction_ground: float = 8.0
+@export var push_inertia: float = 4.0
 
-var target_velocity_x: float = 0.0
+@onready var tilemap = get_tree().get_first_node_in_group("level_tilemap")
+@onready var foot = $FootPosition
+
+var push_velocity_target: float = 0.0
+var is_being_pushed: bool = false
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
-		velocity.y += get_gravity().y * delta
+		velocity.y += get_gravity().y * gravity_scale * delta
 
-	var _friction = get_friction_under_object()
-
-	if target_velocity_x != 0:
-		velocity.x = move_toward(velocity.x, target_velocity_x, acceleration * delta)
+	if is_being_pushed:
+		velocity.x = move_toward(velocity.x, push_velocity_target, push_inertia * 100 * delta)
 	else:
-		velocity.x = move_toward(velocity.x, 0, acceleration * _friction * delta)
+		velocity.x = move_toward(velocity.x, 0, friction_ground * 100 * delta)
 
 	move_and_slide()
-	target_velocity_x = 0.0
+	is_being_pushed = false
+	push_velocity_target = 0.0
 
-func slide_object(direction: Vector2, speed_of_player: float):
-	target_velocity_x = direction.x * speed_of_player * weight_modifier
-
+func push(target_speed: float) -> void:
+	is_being_pushed = true
+	push_velocity_target = target_speed
+	
 func get_friction_under_object() -> float:
 	if not foot or not tilemap:
 		return 0.4
