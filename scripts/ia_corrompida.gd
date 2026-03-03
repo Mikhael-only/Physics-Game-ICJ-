@@ -25,7 +25,7 @@ func _ready():
 
 
 func _process(delta: float) -> void:
-	if dialogo_ativo and Input.is_action_just_pressed("ui_accept"):
+	if dialogo_ativo and Input.is_action_just_pressed("interact"):
 		if dialogo_ui.digitando:
 			dialogo_ui.completar_fala()
 		else:
@@ -48,6 +48,7 @@ func iniciar_dialogo() -> void:
 	subir()
 	dialogo_ativo = true
 	player.pode_mover = false
+	await tween.finished
 	player.focar_npc(global_position)
 	mostrar_dialogo()
 

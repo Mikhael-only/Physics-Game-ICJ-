@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://dcc4axalw48bj"]
+
+[ext_resource type="Script" uid="uid://b3jj0mfrl15v5" path="res://scripts/dialogue_ui.gd" id="1_qnb2a"]
+[ext_resource type="FontFile" uid="uid://yg7rvpir4c8g" path="res://shaders/Minecraft.ttf" id="2_luagy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_csuyi"]
+bg_color = Color(0.8666667, 0.4745098, 0.21568628, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.3882353, 0.21960784, 0.10980392, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_8i7gl"]
+font_size = 32
+font_color = Color(1, 0, 0, 1)
+
+[node name="Dialogue_UI(placas)" type="CanvasLayer"]
+script = ExtResource("1_qnb2a")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -528.0
+offset_top = -626.0
+offset_right = 527.0
+offset_bottom = -478.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_csuyi")
+
+[node name="Label" type="Label" parent="Panel"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 55.0
+offset_top = 35.0
+offset_right = 1001.0
+offset_bottom = 106.0
+theme_override_fonts/font = ExtResource("2_luagy")
+label_settings = SubResource("LabelSettings_8i7gl")
+autowrap_mode = 3
+justification_flags = 171

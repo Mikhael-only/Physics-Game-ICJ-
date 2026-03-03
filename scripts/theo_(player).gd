@@ -115,17 +115,29 @@ func apply_push_force(move_direction: float, delta: float) -> void:
 			elif collider is Pushables:
 
 				collider.push(move_direction * PUSH_VELOCITY_BOX)
-			
+				
 func focar_npc(npc_pos: Vector2) -> void:
-	var centro = global_position.lerp(npc_pos, 0.9)
+	
+	# Guarda posição global atual
+	var pos_global_atual = camera.global_position
+	
+	camera.top_level = true
+	camera.global_position = pos_global_atual
+	
 	var tween = create_tween()
-	tween.tween_property(camera, "global_position", centro, 0.5)
+	tween.tween_property(camera, "global_position", npc_pos, 0.5)
 	tween.tween_property(camera, "zoom", Vector2(8, 8), 0.5)
 	
-
 func resetar_camera() -> void:
 	var tween = create_tween()
 	tween.tween_property(camera, "zoom", Vector2(4, 4), 0.5)
+	await tween.finished
+
+	var pos_global_atual = camera.global_position
+
+	camera.top_level = false
+
+	camera.position = camera.get_parent().to_local(pos_global_atual)
 	
 	
 func set_checkpoint(pos: Vector2) -> void:
