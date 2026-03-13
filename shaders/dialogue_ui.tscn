@@ -9,7 +9,7 @@ border_width_left = 10
 border_width_top = 10
 border_width_right = 10
 border_width_bottom = 10
-border_color = Color(0.49424785, 0, 0, 1)
+border_color = Color(0.23317131, 0.17251083, 0.8887134, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -17,7 +17,7 @@ corner_radius_bottom_left = 20
 
 [sub_resource type="LabelSettings" id="LabelSettings_8i7gl"]
 font_size = 32
-font_color = Color(1, 0, 0, 1)
+font_color = Color(0.13705662, 0, 0.75197136, 1)
 
 [node name="Dialogue_UI" type="CanvasLayer"]
 script = ExtResource("1_csuyi")

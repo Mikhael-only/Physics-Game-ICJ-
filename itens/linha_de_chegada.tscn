@@ -1,0 +1,74 @@
+[gd_scene load_steps=8 format=3 uid="uid://bg03pe01yrydm"]
+
+[ext_resource type="Script" uid="uid://bt8l62obntt8h" path="res://scripts/linha_de_chegada.gd" id="1_0ryl7"]
+[ext_resource type="FontFile" uid="uid://yg7rvpir4c8g" path="res://shaders/Minecraft.ttf" id="2_q714d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ilr5"]
+size = Vector2(20, 483)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q714d"]
+bg_color = Color(0.94539195, 0.5220703, 0, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.5598439, 0.26895392, 0.114853285, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_q714d"]
+font = ExtResource("2_q714d")
+font_color = Color(0.3882353, 0.2, 0.039215688, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_c6l37"]
+font = ExtResource("2_q714d")
+font_color = Color(0.38876557, 0.198935, 0.040350992, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2sdh4"]
+font = ExtResource("2_q714d")
+font_color = Color(0.3882353, 0.2, 0.039215688, 1)
+
+[node name="linhaDeChegada" type="Area2D" node_paths=PackedStringArray("label_speed", "label_record", "label_medal")]
+position = Vector2(-1, 0)
+collision_layer = 8
+script = ExtResource("1_0ryl7")
+label_speed = NodePath("SpeedLabel")
+label_record = NodePath("RecordeLabel")
+label_medal = NodePath("MedalLabel")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 231.5)
+shape = SubResource("RectangleShape2D_0ilr5")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 35.0
+offset_top = 187.0
+offset_right = 305.0
+offset_bottom = 300.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_q714d")
+
+[node name="SpeedLabel" type="Label" parent="."]
+offset_left = 90.0
+offset_top = 205.0
+offset_right = 316.0
+offset_bottom = 224.0
+label_settings = SubResource("LabelSettings_q714d")
+
+[node name="RecordeLabel" type="Label" parent="."]
+offset_left = 88.0
+offset_top = 238.0
+offset_right = 327.0
+offset_bottom = 262.0
+label_settings = SubResource("LabelSettings_c6l37")
+
+[node name="MedalLabel" type="Label" parent="."]
+offset_left = 87.0
+offset_top = 270.0
+offset_right = 327.0
+offset_bottom = 294.0
+label_settings = SubResource("LabelSettings_2sdh4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

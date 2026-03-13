@@ -6,6 +6,8 @@ class_name Pushables
 @export var push_inertia: float = 4.0
 @export var abyss_y: float = 665.0
 @export var safe_position: Vector2 = Vector2.ZERO
+@export var push_force: float = 40.0
+@export var max_speed: float = 120.0
 
 @onready var tilemap = get_tree().get_first_node_in_group("level_tilemap")
 @onready var foot = $FootPosition
@@ -32,18 +34,34 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += get_gravity().y * gravity_scale * delta
 
-	if is_being_pushed:
-		velocity.x = move_toward(velocity.x, push_velocity_target, push_inertia * 100 * delta)
+	var friction = get_friction_under_object()
+
+	if not is_being_pushed:
+		velocity.x = move_toward(
+			velocity.x,
+			0,
+			friction_ground * friction * 100 * delta
+		)
 	else:
-		velocity.x = move_toward(velocity.x, 0, friction_ground * 100 * delta)
+		velocity.x = move_toward(
+			velocity.x,
+			velocity.x,
+			friction_ground * friction * 50 * delta)
+		
 
 	move_and_slide()
 	is_being_pushed = false
 	push_velocity_target = 0.0
 
-func push(target_speed: float) -> void:
+func push(direction: float, acceleration: float, delta: float) -> void:
 	is_being_pushed = true
-	push_velocity_target = target_speed
+
+	
+	velocity.x += direction * acceleration * delta
+	
+	var friction = get_friction_under_object()
+	velocity.x = move_toward(velocity.x, 0, friction * 20 * delta)
+	velocity.x = clamp(velocity.x, -max_speed, max_speed)
 	
 func get_friction_under_object() -> float:
 	if not foot or not tilemap:

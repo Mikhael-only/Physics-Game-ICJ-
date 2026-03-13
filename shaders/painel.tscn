@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2jq401agumuw"]
+
+[sub_resource type="FontFile" id="FontFile_ppl5f"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_5pywg"]
+font = SubResource("FontFile_ppl5f")
+font_color = Color(0, 0, 0, 1)
+
+[node name="Painel" type="CanvasLayer"]
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 1.0
+offset_right = 598.0
+offset_bottom = 216.0
+
+[node name="SpeedLabel" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 31.0
+offset_right = 546.0
+offset_bottom = 182.0
+label_settings = SubResource("LabelSettings_5pywg")
+
+[node name="RecordeLabel" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 14.0
+offset_right = 575.0
+offset_bottom = 201.0
+
+[node name="MedalLabel" type="Label" parent="Panel"]
+layout_mode = 0
+offset_right = 589.0
+offset_bottom = 212.0

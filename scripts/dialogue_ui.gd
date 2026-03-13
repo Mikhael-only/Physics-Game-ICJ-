@@ -8,8 +8,10 @@ var timer: Timer
 var npc_ref
 var digitando: bool = false
 
+func _enter_tree():
+	$Panel.visible = false
+	
 func _ready():
-	painel.visible = false
 	timer = Timer.new()
 	add_child(timer)
 	timer.wait_time = 0.05
