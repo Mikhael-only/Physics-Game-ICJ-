@@ -35,7 +35,7 @@ var ja_falou: bool = false
 @export var duracao: float = 0.3
 
 func _ready():
-	dialogo_ui = get_node("/root/Mundo/Dialogue_UI")
+	dialogo_ui = get_node("/root/fase1/Dialogue_UI")
 	tween = create_tween()
 	olho_esquerdo.modulate.a = 0
 	olho_direito.modulate.a = 0

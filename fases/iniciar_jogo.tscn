@@ -1,0 +1,238 @@
+[gd_scene load_steps=19 format=3 uid="uid://dbxyeyp5jd44w"]
+
+[ext_resource type="Script" uid="uid://bukx3664ks7ic" path="res://scripts/iniciar_jogo.gd" id="1_vqhi7"]
+[ext_resource type="Texture2D" uid="uid://c0bc5cu1o4cxd" path="res://sprites/terreno/sky.png" id="2_qcqs3"]
+[ext_resource type="Shader" uid="uid://clv463h6l1xfr" path="res://shaders/mover.gdshader" id="3_a4oki"]
+[ext_resource type="Texture2D" uid="uid://qhi81udodiq2" path="res://sprites/terreno/isles (1).png" id="4_1evu3"]
+[ext_resource type="Texture2D" uid="uid://c2djsp20hu61q" path="res://sprites/terreno/neblina .png" id="5_r0cgj"]
+[ext_resource type="Texture2D" uid="uid://buq2umc6s3y1j" path="res://sprites/terreno/clouds.png" id="6_o7rli"]
+[ext_resource type="FontFile" uid="uid://yg7rvpir4c8g" path="res://shaders/Minecraft.ttf" id="7_1m11k"]
+
+[sub_resource type="Theme" id="Theme_vqhi7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_68u6b"]
+shader = ExtResource("3_a4oki")
+shader_parameter/move_speed = 0.005
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ckelw"]
+shader = ExtResource("3_a4oki")
+shader_parameter/move_speed = 0.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u32r8"]
+shader = ExtResource("3_a4oki")
+shader_parameter/move_speed = 0.05
+
+[sub_resource type="LabelSettings" id="LabelSettings_qvhka"]
+font = ExtResource("7_1m11k")
+font_size = 100
+font_color = Color(0, 0.80232584, 0.73864996, 1)
+outline_size = 10
+outline_color = Color(8.4228816e-08, 0.25173384, 0.25173372, 1)
+shadow_size = 5
+shadow_color = Color(0, 0.19077337, 0.1908009, 0.5803922)
+shadow_offset = Vector2(10, 10)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qcqs3"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.3)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1evu3"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0.27450982, 0.32156864, 1)
+corner_radius_top_left = 11
+corner_radius_top_right = 11
+corner_radius_bottom_right = 11
+corner_radius_bottom_left = 11
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r0cgj"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0.45490196, 0.45490196, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0.70980394, 0.70980394, 0.90588236)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o7rli"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(6.0644747e-06, 0.71100724, 0.7110073, 0.90588236)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0.4566605, 0.4566605, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1m11k"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0.27058825, 0.3137255, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0.41960785, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 5
+
+[sub_resource type="Theme" id="Theme_oju3k"]
+Button/colors/font_color = Color(0.038986247, 0.3572723, 0.28048244, 1)
+Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
+Button/colors/font_focus_color = Color(0.022481272, 0.2649535, 0.20553932, 1)
+Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_outline_color = Color(0.0140089, 0.20316982, 0.15282887, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_disabled_color = Color(1, 1, 1, 0.4)
+Button/colors/icon_focus_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_normal_color = Color(1, 1, 1, 1)
+Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
+Button/constants/align_to_largest_stylebox = 0
+Button/constants/h_separation = 4
+Button/constants/icon_max_width = 0
+Button/constants/outline_size = 0
+Button/font_sizes/font_size = 50
+Button/fonts/font = ExtResource("7_1m11k")
+Button/styles/disabled = SubResource("StyleBoxFlat_qcqs3")
+Button/styles/focus = SubResource("StyleBoxFlat_1evu3")
+Button/styles/hover = SubResource("StyleBoxFlat_r0cgj")
+Button/styles/normal = SubResource("StyleBoxFlat_o7rli")
+Button/styles/pressed = SubResource("StyleBoxFlat_1m11k")
+
+[node name="iniciar jogo" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_vqhi7")
+script = ExtResource("1_vqhi7")
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="Céu" type="Sprite2D" parent="Background"]
+scale = Vector2(4, 4)
+texture = ExtResource("2_qcqs3")
+centered = false
+
+[node name="Ilhas" type="Sprite2D" parent="Background"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_68u6b")
+scale = Vector2(4, 4)
+texture = ExtResource("4_1evu3")
+centered = false
+
+[node name="neblina" type="Sprite2D" parent="Background"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_ckelw")
+position = Vector2(0, -62)
+scale = Vector2(4, 4)
+texture = ExtResource("5_r0cgj")
+centered = false
+
+[node name="Nuvens1" type="Sprite2D" parent="Background"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_u32r8")
+scale = Vector2(4, 4)
+texture = ExtResource("6_o7rli")
+centered = false
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -272.5
+offset_top = 84.0
+offset_right = 272.5
+offset_bottom = 164.0
+grow_horizontal = 2
+text = "Selecione a Fase"
+label_settings = SubResource("LabelSettings_qvhka")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -144.5
+offset_top = -381.0
+offset_right = 144.5
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_oju3k")
+theme_override_constants/separation = 20
+
+[node name="Fase1" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Fase 1
+"
+
+[node name="Fase2" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Fase 2
+"
+
+[node name="Fase3" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Fase 3
+"
+
+[node name="Voltar" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Voltar
+"
+
+[connection signal="pressed" from="VBoxContainer/Fase1" to="." method="_on_fase_1_pressed"]
+[connection signal="pressed" from="VBoxContainer/Fase1" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/Fase2" to="." method="_on_fase_2_pressed"]
+[connection signal="pressed" from="VBoxContainer/Fase3" to="." method="_on_fase_3_pressed"]
+[connection signal="pressed" from="VBoxContainer/Voltar" to="." method="_on_voltar_pressed"]
+[connection signal="pressed" from="VBoxContainer/Voltar" to="." method="_on_exit_pressed"]
