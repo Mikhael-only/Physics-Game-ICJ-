@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://b8dnuc8yet4cw"]
+[gd_scene load_steps=40 format=3 uid="uid://b8dnuc8yet4cw"]
 
 [ext_resource type="PackedScene" uid="uid://b0d1u7pdai08s" path="res://personagens/ia_corrompida.tscn" id="1_pful2"]
 [ext_resource type="PackedScene" uid="uid://csf1d8nrptxud" path="res://shaders/parede_(placas).tscn" id="2_gi5rp"]
@@ -29,6 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://d2egnrw1ig15i" path="res://itens/testebola_1.tscn" id="27_6kwd1"]
 [ext_resource type="PackedScene" uid="uid://b0cm5rk58ljgn" path="res://fases/portal.tscn" id="28_65e7w"]
 [ext_resource type="PackedScene" uid="uid://bgwdw68uvqkus" path="res://fases/portal_2.tscn" id="29_jofrd"]
+[ext_resource type="PackedScene" uid="uid://ddlvq67ykv6ga" path="res://itens/pedra_carregável.tscn" id="30_gi5rp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yvauv"]
 texture = ExtResource("6_u4f47")
@@ -510,7 +511,7 @@ position = Vector2(7778, 373)
 scale = Vector2(1.4, 1.4)
 max_speed = 70.0
 
-[node name="Dialogue_UI" parent="." instance=ExtResource("15_nx2nn")]
+[node name="Dialogue_UI" parent="." groups=["dialogue_ui"] instance=ExtResource("15_nx2nn")]
 
 [node name="background" type="ParallaxBackground" parent="."]
 
@@ -647,3 +648,6 @@ position = Vector2(293, 510)
 
 [node name="portal2" parent="." instance=ExtResource("29_jofrd")]
 position = Vector2(20250, 445)
+
+[node name="pedra_carregável" parent="." instance=ExtResource("30_gi5rp")]
+position = Vector2(339, 615)

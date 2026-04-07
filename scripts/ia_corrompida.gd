@@ -96,7 +96,6 @@ func encerrar_dialogo() -> void:
 	dialogo_ativo = false
 	dialogo_finalizado = true
 	player.resetar_camera()
-	player.pode_mover = true
 	dialogo_ui.ocultar()
 	$CollisionShape2D.disabled = true
 	ja_falou = true

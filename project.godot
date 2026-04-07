@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Physics_Game_ICJ"
-run/main_scene="uid://d0kg16tdc6ilv"
+run/main_scene="uid://1vq87fviq750"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
