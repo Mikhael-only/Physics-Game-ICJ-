@@ -495,6 +495,9 @@ scale = Vector2(0.5, 0.5)
 [node name="Theo (player)" parent="." instance=ExtResource("13_i2x5w")]
 position = Vector2(16629, 417)
 
+[node name="pedra_carregável" parent="." instance=ExtResource("30_2cey2")]
+position = Vector2(16744, 452)
+
 [node name="boxes" type="Node2D" parent="."]
 
 [node name="caixa2" parent="boxes" instance=ExtResource("14_xu338")]
@@ -648,6 +651,3 @@ position = Vector2(293, 510)
 
 [node name="portal2" parent="." instance=ExtResource("29_jkqy4")]
 position = Vector2(20250, 445)
-
-[node name="pedra_carregável" parent="." instance=ExtResource("30_2cey2")]
-position = Vector2(16744, 452)
