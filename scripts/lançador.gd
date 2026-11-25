@@ -35,16 +35,16 @@ func _process(delta):
 			if Input.is_action_just_pressed("ui_interact"):
 				sair_mira()
 
-# 🔗 Conecta pedra na máquina
+
 func conectar_pedra(p):
 	pedra = p
 	pedra.freeze = true
 
-# 🔗 Conecta player
+
 func conectar_player(p):
 	player = p
 
-# 🎯 Entrar na mira (AGORA COM CONDIÇÃO)
+
 func entrar_mira():
 	if not player or not player.tem_pedra:
 		print("Você precisa de uma pedra!")
@@ -58,7 +58,7 @@ func entrar_mira():
 	player.pode_mover = false
 	player.camera.zoom = Vector2(3, 3)
 
-# ❌ Sair da mira (devolve pedra)
+
 func sair_mira():
 	modo_mira = false
 	
@@ -72,19 +72,19 @@ func sair_mira():
 	
 	esconder_trajetoria()
 
-# 🎮 Controle do ângulo (fixo)
+
 func controlar_angulo(delta):
 	if Input.is_action_pressed("ui_up"):
 		angulo -= 80 * delta
 	if Input.is_action_pressed("ui_down"):
 		angulo += 80 * delta
 	
-	# 🔒 limite de ângulo
+	
 	angulo = clamp(angulo, -80, -10)
 
 	rotation_degrees = angulo
 
-# 🚀 Lançar pedra
+
 func lancar():
 	pedra.freeze = false
 	
@@ -95,7 +95,7 @@ func lancar():
 	
 	sair_mira()
 
-# 📈 Trajetória
+
 func desenhar_trajetoria():
 	var pos_inicial = ponto_saida.global_position
 	

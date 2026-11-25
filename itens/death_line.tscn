@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cn0tty1wdbgr6"]
+
+[ext_resource type="Script" uid="uid://b60b1m6m61xn1" path="res://scripts/death_line.gd" id="1_lobkf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0kn7r"]
+size = Vector2(824, 20)
+
+[node name="DeathLine" type="Area2D"]
+collision_layer = 8
+collision_mask = 13
+script = ExtResource("1_lobkf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_0kn7r")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

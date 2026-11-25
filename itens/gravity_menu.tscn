@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://xyquks2qqb4b"]
+
+[ext_resource type="Script" uid="uid://dqfvmkuv3ofhj" path="res://scripts/gravity_menu.gd" id="1_4vau2"]
+
+[node name="GravityMenu" type="CanvasLayer"]
+script = ExtResource("1_4vau2")

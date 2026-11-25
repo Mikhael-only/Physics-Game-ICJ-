@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://byuhn6amdun6v"]
+[gd_scene load_steps=50 format=3 uid="uid://byuhn6amdun6v"]
 
 [ext_resource type="Script" uid="uid://do3hp3s0botfq" path="res://scripts/theo_(player).gd" id="1_sy5gt"]
 [ext_resource type="Texture2D" uid="uid://d18ll4s65utv2" path="res://sprites/SpritesTheoGodot.png" id="1_tynch"]
@@ -6,6 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://c64kh3bn5jjgi" path="res://sprites/interagiveis/SpritesTheoGodot (2).png" id="3_flinb"]
 [ext_resource type="Texture2D" uid="uid://beaki0g672h15" path="res://icon.svg" id="4_blyh2"]
 [ext_resource type="Texture2D" uid="uid://coqftf72d3l3p" path="res://sprites/interagiveis/SpritesTheoGodot.png" id="5_xgpkk"]
+[ext_resource type="AudioStream" uid="uid://dlj3arl5obvjl" path="res://assets/audio/sfx/Morte.wav" id="7_hrf74"]
+[ext_resource type="AudioStream" uid="uid://b57mfmdqmo3oe" path="res://assets/audio/sfx/Pulo.wav" id="8_020lt"]
+[ext_resource type="AudioStream" uid="uid://bx1d7umvixnr1" path="res://assets/audio/sfx/Upgrade.wav" id="9_ps253"]
+[ext_resource type="AudioStream" uid="uid://chl8ntt6qk7bs" path="res://assets/audio/sfx/respawn1.wav" id="10_ps253"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hrf74"]
 atlas = ExtResource("2_xgpkk")
@@ -346,6 +350,22 @@ collision_mask = 15
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -9)
 shape = SubResource("RectangleShape2D_xgpkk")
+
+[node name="morte" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_hrf74")
+
+[node name="pulo" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_020lt")
+volume_db = -16.0
+
+[node name="upgrade" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_ps253")
+volume_db = -5.0
+pitch_scale = 0.25
+
+[node name="respawn" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_ps253")
+pitch_scale = 1.3
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

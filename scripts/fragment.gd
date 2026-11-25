@@ -1,6 +1,7 @@
 extends Area2D
 
 @onready var animation := $AnimatedSprite2D
+@onready var som_upgrade: AudioStreamPlayer2D = $upgrade
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.

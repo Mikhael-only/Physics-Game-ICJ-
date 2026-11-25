@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://d0kg16tdc6ilv"]
+[gd_scene load_steps=19 format=3 uid="uid://d0kg16tdc6ilv"]
 
 [ext_resource type="FontFile" uid="uid://yg7rvpir4c8g" path="res://shaders/Minecraft.ttf" id="1_7jqs7"]
 [ext_resource type="Texture2D" uid="uid://c0bc5cu1o4cxd" path="res://sprites/terreno/sky.png" id="1_o72ba"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://qhi81udodiq2" path="res://sprites/terreno/isles (1).png" id="3_u32r8"]
 [ext_resource type="Texture2D" uid="uid://buq2umc6s3y1j" path="res://sprites/terreno/clouds.png" id="4_68u6b"]
 [ext_resource type="Shader" uid="uid://clv463h6l1xfr" path="res://shaders/mover.gdshader" id="4_ckelw"]
+[ext_resource type="AudioStream" uid="uid://cflxp3tisr44m" path="res://assets/audio/musica/fase1.wav" id="8_68u6b"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_68u6b"]
 shader = ExtResource("4_ckelw")
@@ -213,7 +214,8 @@ text = "Iniciar Jogo
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_7jqs7")
 theme_override_font_sizes/font_size = 50
-text = "Opcoes
+disabled = true
+text = "Opções
 "
 
 [node name="Extras" type="Button" parent="VBoxContainer2"]
@@ -227,8 +229,14 @@ text = "Extras
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_7jqs7")
 theme_override_font_sizes/font_size = 50
-text = "Sair do Jogo
+text = "Sair
 "
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_68u6b")
+pitch_scale = 0.6
+
 [connection signal="pressed" from="VBoxContainer2/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer2/Opções" to="." method="_on_opções_pressed"]
+[connection signal="pressed" from="VBoxContainer2/Extras" to="." method="_on_extras_pressed"]
 [connection signal="pressed" from="VBoxContainer2/Exit" to="." method="_on_exit_pressed"]

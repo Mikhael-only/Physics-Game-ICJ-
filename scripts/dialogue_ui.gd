@@ -41,3 +41,27 @@ func completar_fala():
 
 func ocultar():
 	painel.visible = false
+
+signal dialogo_encerrado
+var modo_transicao := false
+
+func mostrar_fala_transicao(fala: String) -> void:
+	modo_transicao = true
+	npc_ref = null
+	painel.visible = true
+	fala_completa = fala
+	texto.text = ""
+	indice_letra = 0
+	digitando = true
+	timer.start()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if not modo_transicao or not painel.visible:
+		return
+	if event.is_action_pressed("interact"):
+		if digitando:
+			completar_fala()
+		else:
+			ocultar()
+			modo_transicao = false
+			dialogo_encerrado.emit()

@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1v2232g5blj2"]
+
+[ext_resource type="Script" uid="uid://cd0jat822hunu" path="res://scripts/transicao.gd" id="1_flt0j"]
+[ext_resource type="PackedScene" uid="uid://cojjwi3oyywvv" path="res://shaders/dialogue_ui.tscn" id="2_0xjit"]
+
+[node name="Transicao" type="Node2D"]
+script = ExtResource("1_flt0j")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Dialogue_UI" parent="." instance=ExtResource("2_0xjit")]
+layer = 101
+
+[node name="Panel" parent="Dialogue_UI" index="0"]
+anchors_preset = 8
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -527.5
+offset_top = -74.0
+offset_right = 527.5
+offset_bottom = 74.0
+grow_vertical = 2
+
+[node name="Label" parent="Dialogue_UI/Panel" index="0"]
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[editable path="Dialogue_UI"]

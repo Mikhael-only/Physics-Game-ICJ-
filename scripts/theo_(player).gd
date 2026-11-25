@@ -11,7 +11,17 @@ var last_checkpoint: Vector2 = Vector2.ZERO
 var pushing := false
 var frozen_in_air := false
 var pedra_perto = null
+var collected_gravity_item: bool = false
+var gravity_multiplier: float = 1.0
+var gravity_menu: GravityMenu = null
+var em_zona_camera: bool = false
+var em_dialogo: bool = false
+var em_zona_gravidade: bool = false
+var gravidade_zona_anulada: bool = false
 
+const GRAVITY_MOON:   float = 0.4
+const GRAVITY_EARTH:  float = 1.0   
+const GRAVITY_SATURN: float = 4.0 
 
 @export var PUSH_SPEED_OBJECT: float = 1000.0
 @export var PUSH_FORCE_RIGID: float = 3000.0
@@ -26,6 +36,10 @@ var pedra_perto = null
 @onready var animation: AnimatedSprite2D = $AnimatedSprite2D
 @onready var camera: Camera2D = $Camera2D
 @onready var raycast: RayCast2D = $RayCast2D
+@onready var som_pulo: AudioStreamPlayer2D = $pulo
+@onready var som_morte: AudioStreamPlayer2D = $morte
+@onready var som_respawn: AudioStreamPlayer2D = $respawn
+@onready var som_upgrade: AudioStreamPlayer2D = $upgrade
 #@onready var effect1: AnimatedSprite2D = $Efects
 #@onready var effect2: AnimatedSprite2D = $Efects2
 
@@ -92,6 +106,7 @@ func freeze_in_air(target_pos: Vector2, time: float) -> void:
 	pode_mover = true
 
 func colect_skill_flash(be_flash: bool) -> void:
+	som_upgrade.play()  
 	colected_flash = be_flash
 	if be_flash:
 		SPEED += 10000.0 
@@ -109,7 +124,7 @@ func get_friction_under_player() -> float:
 	var tile_pos: Vector2i = global_position_to_tile(foot.global_position)
 
 	if tile_pos not in tilemap.get_used_cells(0):
-		return 0.4
+		return 1.0
 
 	var source_id = tilemap.get_cell_source_id(0, tile_pos)
 	var atlas_coord = tilemap.get_cell_atlas_coords(0, tile_pos)
@@ -119,7 +134,7 @@ func get_friction_under_player() -> float:
 	var tile_data = source.get_tile_data(atlas_coord, alt)
 	if tile_data:
 		var friction = tile_data.get_custom_data("friction")
-		return friction if friction != null else 0.4
+		return friction if friction != null else 1.0
 
 	return 0.4
 	
@@ -133,6 +148,9 @@ func _process(delta):
 				pedra_perto.sair_mira()
 			else:
 				pedra_perto.entrar_mira()
+				
+	if collected_gravity_item and Input.is_action_just_pressed("gravity_menu"):
+		_toggle_gravity_menu()
 		
 
 func _physics_process(delta: float) -> void:
@@ -145,18 +163,22 @@ func _physics_process(delta: float) -> void:
 	raycast.target_position.x = direction * 15
 	
 	if not is_on_floor() and not frozen_in_air:
-		velocity.y += get_gravity().y * delta
+		velocity.y += get_gravity().y * gravity_multiplier * delta
 		
 	if pode_mover:
+		var speed_multiplier: float = 1.0 / sqrt(gravity_multiplier)
+		var effective_speed: float = SPEED * speed_multiplier
+		
 		if not is_being_pulled_by_orb:
-			velocity.x = move_toward(velocity.x, direction * SPEED, acceleration * _friction * delta)
+			velocity.x = move_toward(velocity.x, direction * effective_speed, acceleration * _friction * delta)
 			if direction != 0:
 				animation.scale.x = direction
 		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
+			velocity.x = move_toward(velocity.x, 0, effective_speed)
 
 		if Input.is_action_just_pressed("ui_up") and is_on_floor():
 			velocity.y = JUMP_FORCE
+			som_pulo.play()
 	else:
 		velocity.x = 0
 		
@@ -247,17 +269,21 @@ func die() -> void:
 	is_dead = true
 	pode_mover = false
 	velocity = Vector2.ZERO
+	som_morte.play()
 	animation.play("death") 
 	await animation.animation_finished
 	respawn()
 
 func respawn() -> void:
+	velocity = Vector2.ZERO
+	som_respawn.play()
 	if last_checkpoint != Vector2.ZERO:
 		global_position = last_checkpoint
 	else:
 		global_position = safe_position
 	animation.play("respawn")
 	await animation.animation_finished
+	
 	is_dead = false
 	pode_mover = true
 	
@@ -288,3 +314,60 @@ func seguir_pedra(pedra):
 		tempo += get_process_delta_time()
 	
 	resetar_camera()
+	
+func collect_gravity_item() -> void:
+	if collected_gravity_item:
+		return
+	collected_gravity_item = true
+	_setup_gravity_menu()
+	som_upgrade.play()           
+	_play_gravity_collect_animation()  
+
+func _setup_gravity_menu() -> void:
+	gravity_menu = GravityMenu.new()
+	add_child(gravity_menu)
+	gravity_menu.gravity_selected.connect(_on_gravity_selected)
+
+func _play_gravity_collect_animation() -> void:
+	
+	pode_mover = false
+	velocity = Vector2.ZERO
+	animation.play("unstable")
+	animation.speed_scale = 1.5
+	await get_tree().create_timer(2.0).timeout
+	animation.speed_scale = 1.0
+	
+	if gravity_menu == null or not gravity_menu.visible:
+		pode_mover = true
+
+func _toggle_gravity_menu() -> void:
+	if gravity_menu == null:
+		return
+	if gravity_menu.visible:
+		gravity_menu.close()
+		pode_mover = true
+	else:
+		gravity_menu.open()
+		pode_mover = false
+		velocity.x = 0.0
+
+func _on_gravity_selected(preset: String) -> void:
+	match preset:
+		"moon":
+			gravity_multiplier = GRAVITY_MOON
+		"earth":
+			gravity_multiplier = GRAVITY_EARTH
+		"saturn":
+			gravity_multiplier = GRAVITY_SATURN
+	if em_zona_gravidade:
+		gravidade_zona_anulada = true
+	pode_mover = true
+	
+func entrar_zona_gravidade(valor: float) -> void:
+	em_zona_gravidade = true
+	gravidade_zona_anulada = false
+	gravity_multiplier = valor
+
+func sair_zona_gravidade() -> void:
+	em_zona_gravidade = false
+	gravidade_zona_anulada = false

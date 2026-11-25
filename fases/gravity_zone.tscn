@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://der0bwbnvmthb"]
+
+[ext_resource type="Script" uid="uid://bumkim416dxp7" path="res://scripts/gravity_zone.gd" id="1_hx11e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4cb1g"]
+
+[node name="GravityZone" type="Area2D"]
+script = ExtResource("1_hx11e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4cb1g")

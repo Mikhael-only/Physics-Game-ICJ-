@@ -1,0 +1,114 @@
+[gd_scene load_steps=18 format=3 uid="uid://bk5kifn2ptbjn"]
+
+[ext_resource type="Script" uid="uid://cq7mlnsdu8pyp" path="res://scripts/gravity_item.gd" id="1_6dejx"]
+[ext_resource type="Texture2D" uid="uid://d03vi2dwn5x52" path="res://sprites/interagiveis/fragment.png" id="2_jp20d"]
+[ext_resource type="AudioStream" uid="uid://bx1d7umvixnr1" path="res://assets/audio/sfx/Upgrade.wav" id="3_0x56s"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0x56s"]
+radius = 8.0
+height = 22.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ksu0s"]
+atlas = ExtResource("2_jp20d")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8gv1i"]
+atlas = ExtResource("2_jp20d")
+region = Rect2(20, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3h8fc"]
+atlas = ExtResource("2_jp20d")
+region = Rect2(40, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ik62"]
+atlas = ExtResource("2_jp20d")
+region = Rect2(60, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31axg"]
+atlas = ExtResource("2_jp20d")
+region = Rect2(80, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hk4go"]
+atlas = ExtResource("2_jp20d")
+region = Rect2(100, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8vtj"]
+atlas = ExtResource("2_jp20d")
+region = Rect2(120, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2lwl7"]
+atlas = ExtResource("2_jp20d")
+region = Rect2(140, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dlj11"]
+atlas = ExtResource("2_jp20d")
+region = Rect2(160, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2iekg"]
+atlas = ExtResource("2_jp20d")
+region = Rect2(180, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8oslu"]
+atlas = ExtResource("2_jp20d")
+region = Rect2(200, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rnxpt"]
+atlas = ExtResource("2_jp20d")
+region = Rect2(220, 0, 20, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dpkje"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ksu0s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8gv1i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3h8fc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ik62")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31axg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hk4go")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l8vtj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2lwl7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dlj11")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2iekg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8oslu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rnxpt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="GravityItem" type="Area2D"]
+script = ExtResource("1_6dejx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_0x56s")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_dpkje")
+frame_progress = 0.8863749
+
+[node name="upgrade" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_0x56s")

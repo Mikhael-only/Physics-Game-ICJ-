@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bxmhc0lirwwvh" path="res://scripts/checkpoint.gd" id="1_6auh8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6auh8"]
-size = Vector2(10, 284)
+size = Vector2(10, 116)
 
 [node name="Area2D" type="Area2D"]
 collision_layer = 8
@@ -11,7 +11,6 @@ collision_mask = 5
 script = ExtResource("1_6auh8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-5, 2)
 shape = SubResource("RectangleShape2D_6auh8")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

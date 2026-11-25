@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://b0d1u7pdai08s"]
+[gd_scene load_steps=53 format=3 uid="uid://b0d1u7pdai08s"]
 
 [ext_resource type="Script" uid="uid://dvpavlfpcu32g" path="res://scripts/ia_corrompida.gd" id="1_ktynd"]
 [ext_resource type="Texture2D" uid="uid://cm4r8va7bdr7i" path="res://sprites/interagiveis/Sprites_IACorrompida_Godot (Entrada).png" id="2_2dpeh"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://l2u2rh10xali" path="res://sprites/interagiveis/base_IACorrompidal.png" id="4_6jik4"]
 [ext_resource type="Texture2D" uid="uid://bcltpjrwyxv00" path="res://sprites/interagiveis/olho_IA.png" id="5_5tu4t"]
 [ext_resource type="Texture2D" uid="uid://2mft7iq4pixa" path="res://sprites/interagiveis/boca_IA.png" id="6_sx5qr"]
+[ext_resource type="AudioStream" uid="uid://b2hxacdbthfdl" path="res://assets/audio/sfx/Fala_IA.wav" id="8_up7j6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1s1s8"]
 atlas = ExtResource("2_2dpeh")
@@ -229,7 +230,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0wx0i"]
-size = Vector2(65, 700)
+size = Vector2(65, 283)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6jik4"]
 size = Vector2(182, 230)
@@ -341,7 +342,7 @@ animation = &"saida"
 autoplay = "saida"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, -174)
+position = Vector2(0.5, -14.5)
 shape = SubResource("RectangleShape2D_0wx0i")
 
 [node name="area_animacao" type="Area2D" parent="."]
@@ -374,6 +375,11 @@ scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_8n84w")
 animation = &"falando"
 autoplay = "falando"
+
+[node name="SomFalando" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_up7j6")
+volume_db = -6.0
+pitch_scale = 2.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
